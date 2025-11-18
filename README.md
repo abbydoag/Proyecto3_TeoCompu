@@ -1,0 +1,2 @@
+## Video de explicacion
+(Esto lo subi hoy porque ya era muy noche cuando lo terminé y en mi casa realmente no hay mucha "cancelación de ruido" entonces lo grabé en la mañana porque iba a terminar despertando a alguien que tenía que hacer algo temprano)
