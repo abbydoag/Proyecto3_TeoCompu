@@ -1,0 +1,96 @@
+#Lengauje de esta maquina: {aⁿbⁿ | n ≥ 1}
+
+---
+q_states:
+  q_list:
+  - 'q0'
+  - 'q1'
+  - 'q2'
+  - 'q3'
+  - 'q4'
+  initial: 'q0'
+  final: 'q4'
+alphabet:
+- 'a'
+- 'b'
+tape_alphabet:
+- '#'
+- 'X'
+- 'Y'
+- ' '
+delta:
+# q0: buscar primera "a"
+- params:
+    initial_state: 'q0'
+    tape_input: 'a'
+  output:
+    final_state: 'q1'
+    tape_output: 'X'
+    tape_displacement: 'R'
+
+- params:
+    initial_state: 'q0'
+    tape_input: 'Y'
+  output:
+    final_state: 'q3'
+    tape_output: 'Y'
+    tape_displacement: 'R'
+
+# q1: buscar más "a"
+- params:
+    initial_state: 'q1'
+    tape_input: 'a'
+  output:
+    final_state: 'q1'
+    tape_output: 'a'
+    tape_displacement: 'R'
+
+# q1: encontrar primera "b"
+- params:
+    initial_state: 'q1'
+    tape_input: 'b'
+  output:
+    final_state: 'q2'
+    tape_output: 'Y'
+    tape_displacement: 'L'
+
+# q2: regresar a inicio
+- params:
+    initial_state: 'q2'
+    tape_input: 'a'
+  output:
+    final_state: 'q2'
+    tape_output: 'a'
+    tape_displacement: 'L'
+
+- params:
+    initial_state: 'q2'
+    tape_input: 'X'
+  output:
+    final_state: 'q0'
+    tape_output: 'X'
+    tape_displacement: 'R'
+
+# q3: verificar que solo pueden haber "Y" hasta el final
+- params:
+    initial_state: 'q3'
+    tape_input: 'Y'
+  output:
+    final_state: 'q3'
+    tape_output: 'Y'
+    tape_displacement: 'R'
+
+- params:
+    initial_state: 'q3'
+    tape_input: ' '
+  output:
+    final_state: 'q4'
+    tape_output: ' '
+    tape_displacement: 'S'
+
+sim_strings:
+- "aabb"
+- "ab"
+- "aaabbb"
+- "aab"
+- "abb"

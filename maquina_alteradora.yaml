@@ -1,0 +1,147 @@
+#intertir cadenas binarias
+---
+q_states:
+  q_list:
+  - 'q0'
+  - 'q1' 
+  - 'q2'
+  - 'q3'
+  - 'q4'
+  - 'q5'
+  initial: 'q0'
+  final: 'q5'
+alphabet:
+- '0'
+- '1'
+tape_alphabet:
+- '#'
+- 'X'
+- 'Y'
+- ' '
+delta:
+#marcar extremos, preparar
+- params:
+    initial_state: 'q0'
+    tape_input: '0'
+  output:
+    final_state: 'q1'
+    tape_output: 'X'
+    tape_displacement: 'R'
+
+- params:
+    initial_state: 'q0'
+    tape_input: '1'
+  output:
+    final_state: 'q1'
+    tape_output: 'X'
+    tape_displacement: 'R'
+
+- params:
+    initial_state: 'q0'
+    tape_input: ' '
+  output:
+    final_state: 'q5'
+    tape_output: ' '
+    tape_displacement: 'S'
+
+#Ir al final de cadena
+- params:
+    initial_state: 'q1'
+    tape_input: '0'
+  output:
+    final_state: 'q1'
+    tape_output: '0'
+    tape_displacement: 'R'
+
+- params:
+    initial_state: 'q1'
+    tape_input: '1'
+  output:
+    final_state: 'q1'
+    tape_output: '1'
+    tape_displacement: 'R'
+
+- params:
+    initial_state: 'q1'
+    tape_input: ' '
+  output:
+    final_state: 'q2'
+    tape_output: ' '
+    tape_displacement: 'L'
+
+#marcar final, comenzar a invertir
+- params:
+    initial_state: 'q2'
+    tape_input: '0'
+  output:
+    final_state: 'q3'
+    tape_output: 'Y'
+    tape_displacement: 'L'
+
+- params:
+    initial_state: 'q2'
+    tape_input: '1'
+  output:
+    final_state: 'q3'
+    tape_output: 'Y'
+    tape_displacement: 'L'
+
+- params:
+    initial_state: 'q2'
+    tape_input: 'X'
+  output:
+    final_state: 'q4'
+    tape_output: 'X'
+    tape_displacement: 'R'
+
+#regresar a inicio y encontrar sig caracter
+- params:
+    initial_state: 'q3'
+    tape_input: '0'
+  output:
+    final_state: 'q3'
+    tape_output: '0'
+    tape_displacement: 'L'
+
+- params:
+    initial_state: 'q3'
+    tape_input: '1'
+  output:
+    final_state: 'q3'
+    tape_output: '1'
+    tape_displacement: 'L'
+
+- params:
+    initial_state: 'q3'
+    tape_input: 'X'
+  output:
+    final_state: 'q0'
+    tape_output: 'X'
+    tape_displacement: 'R'
+
+#reconstruir cadena invertida
+- params:
+    initial_state: 'q4'
+    tape_input: 'Y'
+  output:
+    final_state: 'q4'
+    tape_output: '0'
+    tape_displacement: 'R'
+
+- params:
+    initial_state: 'q4'
+    tape_input: ' '
+  output:
+    final_state: 'q5'
+    tape_output: ' '
+    tape_displacement: 'S'
+
+sim_strings:
+- "0101"
+- "1100"
+- "101010"
+- "000111"
+- "1001"
+- "111000"
+- "0"
+- "1"
